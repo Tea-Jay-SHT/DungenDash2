@@ -7,8 +7,12 @@
 package com.wedontgetpaidenough.dungendash2.model;
 
 import java.awt.*;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import com.wedontgetpaidenough.dungendash2.view.Renderer;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -16,19 +20,15 @@ import java.util.HashMap;
 
 public class GameState {
     public static final int TILE_SIZE = 128;
-    private Double playerX,playerY,xMomentum=0d,yMomentum=0d;
+    private Double xMomentum=0d,yMomentum=0d;
     private Rectangle playerRectangle;
     private Map currentMap;
+    private Renderer renderer;
     private HashMap<String, Map> maps = new HashMap<>();
-    public void switchMap(WarpZone warpZone){
-        currentMap = maps.get(warpZone.getDestanation());
-        playerX = warpZone.getSpawnLocation().getX();
-        playerY = warpZone.getSpawnLocation().getY();
-        xMomentum = 0d;
-        yMomentum = 0d;
-    }
+    //region init
     public void init(){
         setupJson();
+        playerRectangle = new Rectangle(0,0,TILE_SIZE,TILE_SIZE);
     }
     private void setupJson(){
         String content = "wompwomp";
@@ -43,4 +43,25 @@ public class GameState {
             maps.put(map.name,new Map(map,TILE_SIZE));
         }
     }
+    //endregion
+    public void switchMap(WarpZone warpZone){  //switch map, useful for the warp zones in map object
+        currentMap = maps.get(warpZone.getDestanation());
+        playerRectangle.x =(int) Math.round(warpZone.getSpawnLocation().getX());
+        playerRectangle.y =(int) Math.round(warpZone.getSpawnLocation().getY());
+        xMomentum = 0d;
+        yMomentum = 0d;
+        renderer.newMap();
+    }
+    //region getters/setters
+    public Map getCurrentMap(){return currentMap;}
+    public void addXMomentum(double amount){xMomentum += amount;}
+    public void addYMomentum(double amount){yMomentum += amount;}
+    public Double getxMomentum() {return xMomentum;}
+    public Double getyMomentum() {return yMomentum;}
+    public void setxMomentum(Double xMomentum) {this.xMomentum = xMomentum;}
+    public void setyMomentum(Double yMomentum) {this.yMomentum = yMomentum;}
+    public void setRenderer(Renderer renderer){this.renderer = renderer;}
+    public Rectangle getPlayerRectangle(){return(Rectangle) playerRectangle.clone();}
+    public void setPlayerRectangle(Rectangle playerRectangle){this.playerRectangle = playerRectangle;}
+    //endregion
 }

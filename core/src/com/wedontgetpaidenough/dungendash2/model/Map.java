@@ -6,8 +6,8 @@
  */
 package com.wedontgetpaidenough.dungendash2.model;
 
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.JsonValue;
 import java.awt.*;
 import java.util.ArrayList;
@@ -15,16 +15,16 @@ import java.util.HashMap;
 
 public class Map {
     private String mapName;
-    private OrthogonalTiledMapRenderer map;
+    private TiledMap map;
     private ArrayList<Rectangle> collisionRectangles = new ArrayList<>();
     private HashMap<String,Point> enemySpawns = new HashMap<>();
     private HashMap<Rectangle,WarpZone> warpZones = new HashMap<>();
     private HashMap<String,Rectangle> specialEvents = new HashMap<>();
     private HashMap<Rectangle,Dialauge> dialaugeMap = new HashMap<>();
 
-    public Map(JsonValue reader,int tileScale){
+    public Map(JsonValue reader,int tileScale){   //Json parser that scales everything with the tile size
         mapName = reader.getString("mapName");
-        //this.map = new OrthogonalTiledMapRenderer(new TmxMapLoader().load(reader.getString("map")));
+        this.map = new TmxMapLoader().load(reader.getString("map"));
         for(JsonValue colisionRect:reader.get("collision").iterator()){
             collisionRectangles.add(
                     new Rectangle((int) Math.round(colisionRect.getDouble("x")*tileScale),(int) Math.round(colisionRect.getDouble("y")*tileScale),(int) Math.round(colisionRect.getDouble("l")*tileScale),(int) Math.round(colisionRect.getDouble("w")*tileScale)));
@@ -54,6 +54,7 @@ public class Map {
               new Dialauge(dialauge.get("data"))
             );
         }
-        System.out.println("Hi");
     }
+    public TiledMap getMap(){return map;}
+    public ArrayList<Rectangle> getCollisionRectangles(){return collisionRectangles;}
 }

@@ -7,4 +7,6 @@
 package com.wedontgetpaidenough.dungendash2.view;
 
 public class UiRenderer {
+    //todo add title
+    //todo add menus
 }

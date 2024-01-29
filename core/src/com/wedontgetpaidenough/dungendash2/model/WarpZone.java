@@ -16,11 +16,9 @@ public class WarpZone {
         this.spawnLocation = spawnLocation;
         this.destanation = destanation;
     }
-
     public Point getSpawnLocation() {
         return spawnLocation;
     }
-
     public String getDestanation() {
         return destanation;
     }

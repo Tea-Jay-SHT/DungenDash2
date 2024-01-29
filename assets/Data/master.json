@@ -3,7 +3,7 @@
                 "mapName": "You Shouldnt be here",
                 "map": "TileMaps/testZone/main.tmx",
                 "collision": [
-                               {"x":3,"y":14,"l":3,"w":0.5}
+                               {"x":0,"y":0,"l":3,"w":0.5}
                              ],
                 "enemySpawns": [
                                  {"x":0,"y":0,"enemyType": "spider"}
@@ -21,3 +21,4 @@
                                   ]}
                                 ]
                 }
+}
