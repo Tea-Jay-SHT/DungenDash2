@@ -56,7 +56,4 @@ public class Map {
         }
         System.out.println("Hi");
     }
-    void run(){
-
-    }
 }

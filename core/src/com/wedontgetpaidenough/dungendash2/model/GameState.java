@@ -16,11 +16,17 @@ import java.util.HashMap;
 
 public class GameState {
     public static final int TILE_SIZE = 128;
-    private Double playerX,playerY,xMomentum,yMomentum;
+    private Double playerX,playerY,xMomentum=0d,yMomentum=0d;
     private Rectangle playerRectangle;
     private Map currentMap;
     private HashMap<String, Map> maps = new HashMap<>();
-
+    public void switchMap(WarpZone warpZone){
+        currentMap = maps.get(warpZone.getDestanation());
+        playerX = warpZone.getSpawnLocation().getX();
+        playerY = warpZone.getSpawnLocation().getY();
+        xMomentum = 0d;
+        yMomentum = 0d;
+    }
     public void init(){
         setupJson();
     }
