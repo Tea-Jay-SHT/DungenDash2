@@ -25,6 +25,7 @@ public class DashController {
     private GameState state;
     private State currentState = State.MainMenu;
     private InputController inputController;
+    private SpecialEventController eventController;
     private Renderer renderer;
     public DashController(SpriteBatch batch, OrthographicCamera camera, FitViewport viewport, GameState state) { //Setup all the internal stuff, setup the rest of stuff too.
         this.batch =batch;

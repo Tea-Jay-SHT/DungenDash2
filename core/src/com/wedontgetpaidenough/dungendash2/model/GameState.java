@@ -11,6 +11,8 @@ import java.awt.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import com.wedontgetpaidenough.dungendash2.controller.SpecialEventController;
+import com.wedontgetpaidenough.dungendash2.enums.State;
 import com.wedontgetpaidenough.dungendash2.view.Renderer;
 
 import java.io.IOException;
@@ -24,11 +26,14 @@ public class GameState {
     private Rectangle playerRectangle;
     private Map currentMap;
     private Renderer renderer;
+    private State gameState = State.Playing;
+    private SpecialEventController eventController;
     private HashMap<String, Map> maps = new HashMap<>();
     //region init
     public void init(){
         setupJson();
         playerRectangle = new Rectangle(0,0,TILE_SIZE,TILE_SIZE);
+        eventController = new SpecialEventController();
     }
     private void setupJson(){
         String content = "wompwomp";
@@ -63,5 +68,9 @@ public class GameState {
     public void setRenderer(Renderer renderer){this.renderer = renderer;}
     public Rectangle getPlayerRectangle(){return(Rectangle) playerRectangle.clone();}
     public void setPlayerRectangle(Rectangle playerRectangle){this.playerRectangle = playerRectangle;}
+    public State getGameState() {return gameState;}
+    public void setGameState(State gameState) {this.gameState = gameState;}
+    public SpecialEventController getEventController(){return eventController;}
+
     //endregion
 }

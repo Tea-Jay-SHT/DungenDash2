@@ -7,6 +7,14 @@
     "expandedProjectPaths": [
     ],
     "fileStates": {
+        "empty.tmx": {
+            "scale": 0.3898958333333333,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1922.308308843174,
+                "y": 1281.1114079615284
+            }
+        },
         "testZone/main.tmx": {
             "scale": 0.3898958333333333,
             "selectedLayer": 0,

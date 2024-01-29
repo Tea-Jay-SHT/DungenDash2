@@ -17,11 +17,10 @@ public class Map {
     private String mapName;
     private TiledMap map;
     private ArrayList<Rectangle> collisionRectangles = new ArrayList<>();
-    private HashMap<String,Point> enemySpawns = new HashMap<>();
+    private HashMap<String,Point> enemySpawns = new HashMap<>(); //todo implement enemySpawns
     private HashMap<Rectangle,WarpZone> warpZones = new HashMap<>();
-    private HashMap<String,Rectangle> specialEvents = new HashMap<>();
-    private HashMap<Rectangle,Dialauge> dialaugeMap = new HashMap<>();
-
+    private HashMap<Rectangle,String> specialEvents = new HashMap<>();
+    private HashMap<Rectangle,Dialauge> dialaugeMap = new HashMap<>(); //todo implement dialaugeMap
     public Map(JsonValue reader,int tileScale){   //Json parser that scales everything with the tile size
         mapName = reader.getString("mapName");
         this.map = new TmxMapLoader().load(reader.getString("map"));
@@ -44,8 +43,8 @@ public class Map {
         }
         for(JsonValue event:reader.get("specialEvents")){
             specialEvents.put(
-                    event.getString("eventFunction"),
-                    new Rectangle((int) Math.round(event.getDouble("x")*tileScale),(int) Math.round(event.getDouble("y")*tileScale),(int) Math.round(event.getDouble("l")*tileScale),(int) Math.round(event.getDouble("w")*tileScale))
+                    new Rectangle((int) Math.round(event.getDouble("x")*tileScale),(int) Math.round(event.getDouble("y")*tileScale),(int) Math.round(event.getDouble("l")*tileScale),(int) Math.round(event.getDouble("w")*tileScale)),
+                    event.getString("eventFunction")
             );
         }
         for(JsonValue dialauge:reader.get("dialaugeZones")){
@@ -57,4 +56,8 @@ public class Map {
     }
     public TiledMap getMap(){return map;}
     public ArrayList<Rectangle> getCollisionRectangles(){return collisionRectangles;}
+    public HashMap<String, Point> getEnemySpawns() {return enemySpawns;}
+    public HashMap<Rectangle, WarpZone> getWarpZones() {return warpZones;}
+    public HashMap<Rectangle,String> getSpecialEvents() {return specialEvents;}
+    public HashMap<Rectangle, Dialauge> getDialaugeMap() {return dialaugeMap;}
 }

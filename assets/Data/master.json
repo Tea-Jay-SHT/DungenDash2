@@ -3,16 +3,19 @@
                 "mapName": "You Shouldnt be here",
                 "map": "TileMaps/testZone/main.tmx",
                 "collision": [
-                               {"x":0,"y":0,"l":3,"w":0.5}
-                             ],
+                               {"x":0,"y":0,"l":32,"w":0.5},
+                               {"x":0,"y":0,"l":0.5,"w":22},
+                               {"x":31.5,"y":0,"l":0.5,"w":22},
+                               {"x":0,"y":21.5,"l":32,"w":0.5}
+                ],
                 "enemySpawns": [
-                                 {"x":0,"y":0,"enemyType": "spider"}
+                                 {"x":5,"y":5,"enemyType": "spider"}
                                 ],
                 "warpZones":[
-                                 {"x":0,"y":0,"l":1,"w":1,"destination": "stage","spawnX": 14,"spawnY": 14}
+                                 {"x":11.5,"y":7,"l":1,"w":1,"destination": "stage","spawnX": 14,"spawnY": 14}
                             ],
                 "specialEvents":[
-                                    {"x":0,"y":0,"l":1,"w":1,"eventFunction": "breakTheGame"}
+                                    {"x":2,"y":2,"l":1,"w":1,"eventFunction": "boom"}
                                 ],
                 "dialaugeZones":[
                                   {"x":0,"y":0,"l":1,"w":1,"data": [

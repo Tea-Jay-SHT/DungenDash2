@@ -8,6 +8,7 @@ package com.wedontgetpaidenough.dungendash2.view;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -17,7 +18,7 @@ import com.wedontgetpaidenough.dungendash2.model.GameState;
 
 public class Renderer {
    OrthogonalTiledMapRenderer mapRenderer;
-   Texture cooldude;
+    Texture cooldude;
     GameState state;
     SpriteBatch batch;
     OrthographicCamera camera;

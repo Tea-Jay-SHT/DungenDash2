@@ -9,6 +9,6 @@ package com.wedontgetpaidenough.dungendash2.model;
 import com.badlogic.gdx.utils.JsonValue;
 
 public class Dialauge {
-    public Dialauge(JsonValue dialaugeData){
+    public Dialauge(JsonValue dialaugeData){ //todo all the fucking dialauge gah damn
     }
 }
