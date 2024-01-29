@@ -24,33 +24,33 @@ public class Map {
 
     public Map(JsonValue reader,int tileScale){
         mapName = reader.getString("mapName");
-        this.map = new OrthogonalTiledMapRenderer(new TmxMapLoader().load(reader.getString("map")));
+        //this.map = new OrthogonalTiledMapRenderer(new TmxMapLoader().load(reader.getString("map")));
         for(JsonValue colisionRect:reader.get("collision").iterator()){
             collisionRectangles.add(
-                    new Rectangle(colisionRect.getInt("x"),colisionRect.getInt("y"),colisionRect.getInt("l"),colisionRect.getInt("w")));
+                    new Rectangle((int) Math.round(colisionRect.getDouble("x")*tileScale),(int) Math.round(colisionRect.getDouble("y")*tileScale),(int) Math.round(colisionRect.getDouble("l")*tileScale),(int) Math.round(colisionRect.getDouble("w")*tileScale)));
         }
         for(JsonValue enemySpawn:reader.get("enemySpawns")){
             enemySpawns.put(
                     enemySpawn.getString("enemyType"),
-                    new Point(enemySpawn.getInt("x"),enemySpawn.getInt("y"))
+                    new Point((int) Math.round(enemySpawn.getDouble("x")*tileScale),(int) Math.round(enemySpawn.getDouble("y")*tileScale))
             );
         }
         for(JsonValue warpZone:reader.get("warpZones").iterator()){
             warpZones.put(
-                    new Rectangle(warpZone.getInt("x"),warpZone.getInt("y"),warpZone.getInt("l"),warpZone.getInt("w")),
+                    new Rectangle((int) Math.round(warpZone.getDouble("x")*tileScale),(int) Math.round(warpZone.getDouble("y")*tileScale),(int) Math.round(warpZone.getDouble("l")*tileScale),(int) Math.round(warpZone.getDouble("w")*tileScale)),
                     new WarpZone(
-                            new Point(warpZone.getInt("spawnX"),warpZone.getInt("spawnY")),
+                            new Point((int) Math.round(warpZone.getDouble("spawnX")*tileScale),(int) Math.round(warpZone.getDouble("spawnY")*tileScale)),
                             warpZone.getString("destination")));
         }
         for(JsonValue event:reader.get("specialEvents")){
             specialEvents.put(
                     event.getString("eventFunction"),
-                    new Rectangle(event.getInt("x"),event.getInt("y"),event.getInt("l"),event.getInt("w"))
+                    new Rectangle((int) Math.round(event.getDouble("x")*tileScale),(int) Math.round(event.getDouble("y")*tileScale),(int) Math.round(event.getDouble("l")*tileScale),(int) Math.round(event.getDouble("w")*tileScale))
             );
         }
         for(JsonValue dialauge:reader.get("dialaugeZones")){
             dialaugeMap.put(
-              new Rectangle(dialauge.getInt("x"),dialauge.getInt("y"),dialauge.getInt("l"),dialauge.getInt("w")),
+              new Rectangle((int) Math.round(dialauge.getDouble("x")*tileScale),(int) Math.round(dialauge.getDouble("y")*tileScale),(int) Math.round(dialauge.getDouble("l")*tileScale),(int) Math.round(dialauge.getDouble("w")*tileScale)),
               new Dialauge(dialauge.get("data"))
             );
         }
