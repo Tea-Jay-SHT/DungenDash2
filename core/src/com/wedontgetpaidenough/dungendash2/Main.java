@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.wedontgetpaidenough.dungendash2.controller.DashController;
+import com.wedontgetpaidenough.dungendash2.model.GameState;
 
 public class Main extends ApplicationAdapter {
 	private final int VIEWPORT_WIDTH = 1920,VIEWPORT_HEIGHT = 1080;
@@ -14,6 +15,7 @@ public class Main extends ApplicationAdapter {
 	SpriteBatch batch;
 	OrthographicCamera camera;
 	FitViewport viewport;
+	GameState state;
 	@Override
 	public void resize(int width,int height){
 		viewport.update(width, height, true);
@@ -26,6 +28,8 @@ public class Main extends ApplicationAdapter {
 		batch.setProjectionMatrix(camera.combined);
 		viewport = new FitViewport(VIEWPORT_WIDTH,VIEWPORT_HEIGHT,camera);
 		controller = new DashController(batch,camera,viewport);
+		state = new GameState();
+		state.init();
 	}
 
 	@Override

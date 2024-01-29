@@ -1,0 +1,5 @@
+Structure:
+Tilemaps
+	Zone1
+	Zone2
+	TileSheets
