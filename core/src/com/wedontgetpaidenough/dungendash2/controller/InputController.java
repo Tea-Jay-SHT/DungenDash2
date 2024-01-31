@@ -8,10 +8,10 @@ package com.wedontgetpaidenough.dungendash2.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.wedontgetpaidenough.dungendash2.enums.State;
 import com.wedontgetpaidenough.dungendash2.model.GameState;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class InputController {
     GameState state;
@@ -25,10 +25,18 @@ public class InputController {
                 input();
             case MainMenu:
                 mouseinput();
+                break;
             case Inventory:
             case PauseMenu:
             case Dialauge:
+                dialaugeinput();
                 break;
+        }
+    }
+
+    private void dialaugeinput() {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
+            state.getCurrentDialauge().next();
         }
     }
 
@@ -101,6 +109,18 @@ public class InputController {
             if(playerRectangle.intersects(colider)){
                 state.getEventController().specialEvents(state.getCurrentMap().getSpecialEvents().get(colider));
                 break;
+            }
+        }
+    }
+
+    public void lookForDialauge() {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
+            for(Rectangle colider:state.getCurrentMap().getDialaugeMap().keySet()){
+                if(state.getPlayerRectangle().intersects(colider)){
+                    state.setGameState(State.Dialauge);
+                    state.setCurrentDialauge(state.getCurrentMap().getDialaugeMap().get(colider));
+                    break;
+                }
             }
         }
     }

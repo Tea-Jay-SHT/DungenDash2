@@ -21,7 +21,7 @@ public class Map {
     private HashMap<Rectangle,WarpZone> warpZones = new HashMap<>();
     private HashMap<Rectangle,String> specialEvents = new HashMap<>();
     private HashMap<Rectangle,Dialauge> dialaugeMap = new HashMap<>(); //todo implement dialaugeMap
-    public Map(JsonValue reader,int tileScale){   //Json parser that scales everything with the tile size
+    public Map(JsonValue reader,int tileScale,GameState state){   //Json parser that scales everything with the tile size
         mapName = reader.getString("mapName");
         this.map = new TmxMapLoader().load(reader.getString("map"));
         for(JsonValue colisionRect:reader.get("collision").iterator()){
@@ -50,7 +50,7 @@ public class Map {
         for(JsonValue dialauge:reader.get("dialaugeZones")){
             dialaugeMap.put(
               new Rectangle((int) Math.round(dialauge.getDouble("x")*tileScale),(int) Math.round(dialauge.getDouble("y")*tileScale),(int) Math.round(dialauge.getDouble("l")*tileScale),(int) Math.round(dialauge.getDouble("w")*tileScale)),
-              new Dialauge(dialauge.get("data"))
+              new Dialauge(dialauge.get("data"),state)
             );
         }
     }

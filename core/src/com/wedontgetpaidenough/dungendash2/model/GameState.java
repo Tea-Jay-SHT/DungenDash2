@@ -8,13 +8,14 @@ package com.wedontgetpaidenough.dungendash2.model;
 
 import java.awt.*;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.wedontgetpaidenough.dungendash2.controller.SpecialEventController;
 import com.wedontgetpaidenough.dungendash2.enums.State;
 import com.wedontgetpaidenough.dungendash2.view.Renderer;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,16 +26,29 @@ public class GameState {
     private Double xMomentum=0d,yMomentum=0d;
     private Rectangle playerRectangle;
     private Map currentMap;
+    private Dialauge currentDialauge;
     private Renderer renderer;
     private State gameState = State.Playing;
+    private HashMap<String, Texture> talkingSprites;
     private SpecialEventController eventController;
     private HashMap<String, Map> maps = new HashMap<>();
     //region init
     public void init(){
         setupJson();
+        setupTalkingSprites();
         playerRectangle = new Rectangle(0,0,TILE_SIZE,TILE_SIZE);
         eventController = new SpecialEventController();
     }
+
+    private void setupTalkingSprites() {
+        talkingSprites = new HashMap<>();
+        File dir = new File("assets/Assets/talkingSprites/");
+        for(String file: dir.list()){
+            talkingSprites.put(file.replaceFirst(".png",""),new Texture("assets/Assets/talkingSprites/"+file));
+        }
+        System.out.println("hi");
+    }
+
     private void setupJson(){
         String content = "wompwomp";
         JsonValue reader;
@@ -45,7 +59,7 @@ public class GameState {
         }
         reader = new JsonReader().parse(content);
         for(JsonValue map:reader.iterator()){
-            maps.put(map.name,new Map(map,TILE_SIZE));
+            maps.put(map.name,new Map(map,TILE_SIZE,this));
         }
     }
     //endregion
@@ -71,6 +85,9 @@ public class GameState {
     public State getGameState() {return gameState;}
     public void setGameState(State gameState) {this.gameState = gameState;}
     public SpecialEventController getEventController(){return eventController;}
-
+    public Renderer getRenderer() {return renderer;}
+    public Dialauge getCurrentDialauge() {return currentDialauge;}
+    public void setCurrentDialauge(Dialauge currentDialauge) {this.currentDialauge = currentDialauge;}
+    public HashMap<String, Texture> getTalkingSprites() {return talkingSprites;}
     //endregion
 }

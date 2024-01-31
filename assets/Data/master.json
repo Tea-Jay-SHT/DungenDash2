@@ -18,9 +18,11 @@
                                     {"x":2,"y":2,"l":1,"w":1,"eventFunction": "boom"}
                                 ],
                 "dialaugeZones":[
-                                  {"x":0,"y":0,"l":1,"w":1,"data": [
-                                    {"text":"This is test text","talkingSprite":"troll"},
-                                    {"text":"Bro what","talkingSprite":"player"}
+                                  {"x":2,"y":2,"l":1,"w":1,"data": [
+                                    {"text":"AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH","talkingSprite":"troll"},
+                                    {"text":"Bro what the fuck are you on meth","talkingSprite":"reallyfuckingmadplayer"},
+                                    {"text":"Want some", "talkingSprite": "troll"},
+                                    {"text":"Yes","talkingSprite":"player_luhcalm"}
                                   ]}
                                 ]
                 }

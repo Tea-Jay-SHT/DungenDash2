@@ -23,7 +23,6 @@ public class DashController {
     private OrthographicCamera camera;
     private FitViewport viewport;
     private GameState state;
-    private State currentState = State.MainMenu;
     private InputController inputController;
     private SpecialEventController eventController;
     private Renderer renderer;
@@ -36,13 +35,24 @@ public class DashController {
         renderer = new Renderer(state,batch,camera);
         state.setRenderer(renderer);
         state.switchMap(new WarpZone(new Point(128,128),"stage"));
-    }
+    }//todo make a non-jank solution to display the title screen probably use state.
     public void render(){  //Render order go here :3
-        inputController.doInput();   //todo make a non-jank solution to display the title screen probably use state.
-        renderer.render();
-        camera.position.x = state.getPlayerRectangle().x+(GameState.TILE_SIZE/2);
-        camera.position.y = state.getPlayerRectangle().y+(GameState.TILE_SIZE/2);
-        System.out.println(state.getPlayerRectangle().x+", "+state.getPlayerRectangle().y+" Momentum: "+state.getxMomentum()+", "+state.getyMomentum())    ;
+        switch(state.getGameState()){
+            case Playing:
+                inputController.doInput();
+                renderer.render();
+                camera.position.x = state.getPlayerRectangle().x+(GameState.TILE_SIZE/2);
+                camera.position.y = state.getPlayerRectangle().y+(GameState.TILE_SIZE/2);
+                inputController.lookForDialauge();
+                break;
+            case Dialauge:
+                inputController.doInput();
+                renderer.render();
+                renderer.doDialauge(state.getCurrentDialauge());
+                break;
+        }
+        System.out.println(state.getGameState().toString());
+        System.out.println(state.getPlayerRectangle().x+", "+state.getPlayerRectangle().y+" Momentum: "+state.getxMomentum()+", "+state.getyMomentum());
     }
     public void dispose(){
         //todo: Work down the tree and dispose of all assets.

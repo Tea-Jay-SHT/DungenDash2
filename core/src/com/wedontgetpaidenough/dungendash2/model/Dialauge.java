@@ -6,9 +6,34 @@
  */
 package com.wedontgetpaidenough.dungendash2.model;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonValue;
+import com.wedontgetpaidenough.dungendash2.enums.State;
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Dialauge {
-    public Dialauge(JsonValue dialaugeData){ //todo all the fucking dialauge gah damn
+    private GameState state;
+    private int iterator = 0;
+    private ArrayList<String> talkingSprites = new ArrayList<>();
+    private ArrayList<String> text = new ArrayList<>();
+    public Dialauge(JsonValue dialaugeData,GameState state){
+        for(JsonValue jason: dialaugeData){
+            talkingSprites.add(jason.getString("talkingSprite"));
+            text.add(jason.getString("text"));
+        }
+        this.state = state;
+    }
+    public ArrayList<String> getSprites(){return talkingSprites;}
+    public ArrayList<String> getText(){return text;}
+    public int getIterator(){return iterator;}
+    public void next() {
+        iterator += 1;
+        if(iterator == talkingSprites.size()){
+            state.setGameState(State.Playing);
+            iterator = 0;
+        }
     }
 }
