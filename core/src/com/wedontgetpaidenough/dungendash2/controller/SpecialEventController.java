@@ -6,12 +6,17 @@
  */
 package com.wedontgetpaidenough.dungendash2.controller;
 
-public class SpecialEventController {
-    public SpecialEventController(){
+import com.wedontgetpaidenough.dungendash2.model.GameState;
 
+public class SpecialEventController {
+    private GameState state;
+    public SpecialEventController(GameState state){
+        this.state = state;
     }
     public void specialEvents(String event){
         switch(event){
+            case "none":
+                break;
             case "boom":
                 System.out.println("boom");
                 break;

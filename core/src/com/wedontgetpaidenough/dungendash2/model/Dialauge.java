@@ -19,10 +19,17 @@ public class Dialauge {
     private int iterator = 0;
     private ArrayList<String> talkingSprites = new ArrayList<>();
     private ArrayList<String> text = new ArrayList<>();
+    private ArrayList<String> eventFunctions = new ArrayList<>();
+    private String eventFunction;
     public Dialauge(JsonValue dialaugeData,GameState state){
         for(JsonValue jason: dialaugeData){
             talkingSprites.add(jason.getString("talkingSprite"));
             text.add(jason.getString("text"));
+            if (jason.has("eventFunction")){
+                eventFunctions.add(jason.getString("eventFunction"));
+            }else{
+                eventFunctions.add("none");
+            }
         }
         this.state = state;
     }
@@ -31,6 +38,7 @@ public class Dialauge {
     public int getIterator(){return iterator;}
     public void next() {
         iterator += 1;
+        state.getEventController().specialEvents(eventFunctions.get(iterator-1));
         if(iterator == talkingSprites.size()){
             state.setGameState(State.Playing);
             iterator = 0;

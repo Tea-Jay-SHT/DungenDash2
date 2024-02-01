@@ -21,35 +21,37 @@ public class Map {
     private HashMap<Rectangle,WarpZone> warpZones = new HashMap<>();
     private HashMap<Rectangle,String> specialEvents = new HashMap<>();
     private HashMap<Rectangle,Dialauge> dialaugeMap = new HashMap<>(); //todo implement dialaugeMap
+    private int mapHeight;
     public Map(JsonValue reader,int tileScale,GameState state){   //Json parser that scales everything with the tile size
         mapName = reader.getString("mapName");
         this.map = new TmxMapLoader().load(reader.getString("map"));
+        mapHeight = reader.getInt("mapHeight");
         for(JsonValue colisionRect:reader.get("collision").iterator()){
             collisionRectangles.add(
-                    new Rectangle((int) Math.round(colisionRect.getDouble("x")*tileScale),(int) Math.round(colisionRect.getDouble("y")*tileScale),(int) Math.round(colisionRect.getDouble("l")*tileScale),(int) Math.round(colisionRect.getDouble("w")*tileScale)));
+                    new Rectangle((int) Math.round(colisionRect.getDouble("x")*tileScale),(int) ((Math.round(colisionRect.getDouble("y")+1)*-1)+mapHeight)*tileScale,(int) Math.round(colisionRect.getDouble("l")*tileScale),(int) Math.round(colisionRect.getDouble("w")*tileScale)));
         }
         for(JsonValue enemySpawn:reader.get("enemySpawns")){
             enemySpawns.put(
                     enemySpawn.getString("enemyType"),
-                    new Point((int) Math.round(enemySpawn.getDouble("x")*tileScale),(int) Math.round(enemySpawn.getDouble("y")*tileScale))
+                    new Point((int) Math.round(enemySpawn.getDouble("x")*tileScale),(int) ((Math.round(enemySpawn.getDouble("y")+1)*-1)+mapHeight)*tileScale)
             );
         }
         for(JsonValue warpZone:reader.get("warpZones").iterator()){
             warpZones.put(
-                    new Rectangle((int) Math.round(warpZone.getDouble("x")*tileScale),(int) Math.round(warpZone.getDouble("y")*tileScale),(int) Math.round(warpZone.getDouble("l")*tileScale),(int) Math.round(warpZone.getDouble("w")*tileScale)),
+                    new Rectangle((int) Math.round(warpZone.getDouble("x")*tileScale),(int) ((Math.round(warpZone.getDouble("y")+1)*-1)+mapHeight)*tileScale,(int) Math.round(warpZone.getDouble("l")*tileScale),(int) Math.round(warpZone.getDouble("w")*tileScale)),
                     new WarpZone(
-                            new Point((int) Math.round(warpZone.getDouble("spawnX")*tileScale),(int) Math.round(warpZone.getDouble("spawnY")*tileScale)),
+                            new Point((int) Math.round(warpZone.getDouble("spawnX")*tileScale),(int) ((Math.round(warpZone.getDouble("spawnY")+1)*-1)+mapHeight)*tileScale),
                             warpZone.getString("destination")));
         }
         for(JsonValue event:reader.get("specialEvents")){
             specialEvents.put(
-                    new Rectangle((int) Math.round(event.getDouble("x")*tileScale),(int) Math.round(event.getDouble("y")*tileScale),(int) Math.round(event.getDouble("l")*tileScale),(int) Math.round(event.getDouble("w")*tileScale)),
+                    new Rectangle((int) Math.round(event.getDouble("x")*tileScale),(int) ((Math.round(event.getDouble("y")+1)*-1)+mapHeight)*tileScale,(int) Math.round(event.getDouble("l")*tileScale),(int) Math.round(event.getDouble("w")*tileScale)),
                     event.getString("eventFunction")
             );
         }
         for(JsonValue dialauge:reader.get("dialaugeZones")){
             dialaugeMap.put(
-              new Rectangle((int) Math.round(dialauge.getDouble("x")*tileScale),(int) Math.round(dialauge.getDouble("y")*tileScale),(int) Math.round(dialauge.getDouble("l")*tileScale),(int) Math.round(dialauge.getDouble("w")*tileScale)),
+              new Rectangle((int) Math.round(dialauge.getDouble("x")*tileScale),(int) ((Math.round(dialauge.getDouble("y")+1)*-1)+mapHeight)*tileScale,(int) Math.round(dialauge.getDouble("l")*tileScale),(int) Math.round(dialauge.getDouble("w")*tileScale)),
               new Dialauge(dialauge.get("data"),state)
             );
         }

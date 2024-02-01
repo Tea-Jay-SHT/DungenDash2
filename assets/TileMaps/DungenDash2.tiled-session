@@ -3,8 +3,10 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "testZone/main.tmx",
     "expandedProjectPaths": [
+        "testZone",
+        "."
     ],
     "fileStates": {
         "empty.tmx": {
@@ -19,13 +21,19 @@
             "scale": 0.3898958333333333,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1917.1787336361213,
-                "y": 1275.9818327544751
+                "x": 1765.8562650280528,
+                "y": 1270.8522575474221
             }
         },
         "tileMaps/testTiles.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "tileSets/Shadow.tsx": {
+            "scaleInDock": 1
+        },
+        "tileSets/testRock.tsx": {
+            "scaleInDock": 1
         },
         "tileSets/testTiles.tsx": {
             "scaleInDock": 1,
@@ -39,6 +47,7 @@
     "map.tileHeight": 128,
     "map.tileWidth": 128,
     "openFiles": [
+        "testZone/main.tmx"
     ],
     "project": "DungenDash2.tiled-project",
     "recentFiles": [

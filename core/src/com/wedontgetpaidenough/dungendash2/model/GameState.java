@@ -37,7 +37,7 @@ public class GameState {
         setupJson();
         setupTalkingSprites();
         playerRectangle = new Rectangle(0,0,TILE_SIZE,TILE_SIZE);
-        eventController = new SpecialEventController();
+        eventController = new SpecialEventController(this);
     }
 
     private void setupTalkingSprites() {

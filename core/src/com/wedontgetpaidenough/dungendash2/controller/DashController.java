@@ -34,7 +34,7 @@ public class DashController {
         inputController = new InputController(state);
         renderer = new Renderer(state,batch,camera);
         state.setRenderer(renderer);
-        state.switchMap(new WarpZone(new Point(128,128),"stage"));
+        state.switchMap(new WarpZone(new Point(256,256),"stage"));
     }//todo make a non-jank solution to display the title screen probably use state.
     public void render(){  //Render order go here :3
         switch(state.getGameState()){
@@ -51,8 +51,8 @@ public class DashController {
                 renderer.doDialauge(state.getCurrentDialauge());
                 break;
         }
-        System.out.println(state.getGameState().toString());
-        System.out.println(state.getPlayerRectangle().x+", "+state.getPlayerRectangle().y+" Momentum: "+state.getxMomentum()+", "+state.getyMomentum());
+        //System.out.println(state.getGameState().toString());
+        //System.out.println(state.getPlayerRectangle().x+", "+state.getPlayerRectangle().y+" Momentum: "+state.getxMomentum()+", "+state.getyMomentum());
     }
     public void dispose(){
         //todo: Work down the tree and dispose of all assets.
