@@ -3,6 +3,7 @@
  <properties>
   <property name="mapMusic" value="Music/test.mp3"/>
   <property name="mapName" value="test"/>
+  <property name="mapTitle" value="Test Area"/>
  </properties>
  <tileset firstgid="1" source="../tileSets/testTiles.tsx"/>
  <tileset firstgid="17" source="../tileSets/testRock.tsx"/>
