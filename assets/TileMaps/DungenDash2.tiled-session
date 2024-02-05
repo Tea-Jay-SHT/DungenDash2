@@ -5,8 +5,8 @@
     },
     "activeFile": "testZone/main.tmx",
     "expandedProjectPaths": [
-        "tileSets",
         ".",
+        "tileSets",
         "testZone"
     ],
     "fileStates": {
@@ -19,11 +19,11 @@
             }
         },
         "testZone/main.tmx": {
-            "scale": 0.3898958333333333,
-            "selectedLayer": 5,
+            "scale": 0.387,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1104.141063318194,
-                "y": 1342.6663104461663
+                "x": 1229.9741602067184,
+                "y": 308.7855297157623
             }
         },
         "tileMaps/testTiles.tsx": {

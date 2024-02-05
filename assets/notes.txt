@@ -1,8 +1,8 @@
 =============TILED CHECKLIST=================
 1. go to Map>Map Properties
 2. add 3 properties, mapName, mapTitle and mapMusic (case sensitive)
-3. add object layers coliders, warpZones, dialauge, specialEvents (case sensitive)
-4. add tile layers (TBD)
+3. add object layers coliders, warpZones, dialauge, specialEvents (case sensitive)   <------------ ALWAYS ON TOP
+4. add tile layers (TBD) (Potentially 5 bottom, 5 top layers?)
 =============================================
 
 File Structure:
