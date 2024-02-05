@@ -5,6 +5,7 @@
     },
     "activeFile": "testZone/main.tmx",
     "expandedProjectPaths": [
+        "tileSets",
         "testZone",
         "."
     ],
@@ -19,10 +20,10 @@
         },
         "testZone/main.tmx": {
             "scale": 0.3898958333333333,
-            "selectedLayer": 0,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 1765.8562650280528,
-                "y": 1270.8522575474221
+                "x": 1109.2706385252473,
+                "y": 1345.231098049693
             }
         },
         "tileMaps/testTiles.tsx": {
@@ -30,12 +31,14 @@
             "scaleInEditor": 1
         },
         "tileSets/Shadow.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "tileSets/testRock.tsx": {
             "scaleInDock": 1
         },
         "tileSets/testTiles.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         }
@@ -47,13 +50,17 @@
     "map.tileHeight": 128,
     "map.tileWidth": 128,
     "openFiles": [
-        "testZone/main.tmx"
+        "testZone/main.tmx",
+        "tileSets/Shadow.tsx",
+        "tileSets/testTiles.tsx"
     ],
     "project": "DungenDash2.tiled-project",
+    "property.type": "string",
     "recentFiles": [
+        "tileSets/testTiles.tsx",
+        "tileSets/Shadow.tsx",
         "testZone/main.tmx",
-        "tileMaps/testTiles.tsx",
-        "tileSets/testTiles.tsx"
+        "tileMaps/testTiles.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

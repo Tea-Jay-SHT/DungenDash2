@@ -8,36 +8,40 @@ package com.wedontgetpaidenough.dungendash2.model;
 
 import java.awt.*;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonValue;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Rectangle;
+import com.wedontgetpaidenough.dungendash2.controller.AudioController;
 import com.wedontgetpaidenough.dungendash2.controller.SpecialEventController;
 import com.wedontgetpaidenough.dungendash2.enums.State;
 import com.wedontgetpaidenough.dungendash2.view.Renderer;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class GameState {
     public static final int TILE_SIZE = 128;
     private Double xMomentum=0d,yMomentum=0d;
     private Rectangle playerRectangle;
-    private Map currentMap;
     private Dialauge currentDialauge;
     private Renderer renderer;
     private State gameState = State.Playing;
     private HashMap<String, Texture> talkingSprites;
     private SpecialEventController eventController;
-    private HashMap<String, Map> maps = new HashMap<>();
+    private AudioController audioController;
+    private HashMap<String, TiledMap> maps = new HashMap<>();
+    private TiledMap currentMap;
     //region init
     public void init(){
-        setupJson();
+        setupMaps();
         setupTalkingSprites();
         playerRectangle = new Rectangle(0,0,TILE_SIZE,TILE_SIZE);
         eventController = new SpecialEventController(this);
+        audioController = new AudioController(this);
     }
 
     private void setupTalkingSprites() {
@@ -46,20 +50,17 @@ public class GameState {
         for(String file: dir.list()){
             talkingSprites.put(file.replaceFirst(".png",""),new Texture("assets/Assets/talkingSprites/"+file));
         }
-        System.out.println("hi");
     }
 
-    private void setupJson(){
-        String content = "wompwomp";
-        JsonValue reader;
-        try {
-            content = Files.readString(Paths.get("assets/Data/master.json"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        reader = new JsonReader().parse(content);
-        for(JsonValue map:reader.iterator()){
-            maps.put(map.name,new Map(map,TILE_SIZE,this));
+    private void setupMaps(){
+        for (File dirs : Gdx.files.internal("assets/TileMaps").file().listFiles(File::isDirectory)) {
+            if(dirs.listFiles() != null){
+                for (File file : dirs.listFiles()){
+                    if (file.getName().contains(".tmx")) {
+                        maps.put((String) new TmxMapLoader().load(file.getPath()).getProperties().get("mapName"), new TmxMapLoader().load(file.getPath()));
+                    }
+                }
+            }
         }
     }
     //endregion
@@ -70,9 +71,9 @@ public class GameState {
         xMomentum = 0d;
         yMomentum = 0d;
         renderer.newMap();
+        audioController.swapMusic();
     }
     //region getters/setters
-    public Map getCurrentMap(){return currentMap;}
     public void addXMomentum(double amount){xMomentum += amount;}
     public void addYMomentum(double amount){yMomentum += amount;}
     public Double getxMomentum() {return xMomentum;}
@@ -80,7 +81,7 @@ public class GameState {
     public void setxMomentum(Double xMomentum) {this.xMomentum = xMomentum;}
     public void setyMomentum(Double yMomentum) {this.yMomentum = yMomentum;}
     public void setRenderer(Renderer renderer){this.renderer = renderer;}
-    public Rectangle getPlayerRectangle(){return(Rectangle) playerRectangle.clone();}
+    public Rectangle getPlayerRectangle(){return(Rectangle) playerRectangle;}
     public void setPlayerRectangle(Rectangle playerRectangle){this.playerRectangle = playerRectangle;}
     public State getGameState() {return gameState;}
     public void setGameState(State gameState) {this.gameState = gameState;}
@@ -89,5 +90,7 @@ public class GameState {
     public Dialauge getCurrentDialauge() {return currentDialauge;}
     public void setCurrentDialauge(Dialauge currentDialauge) {this.currentDialauge = currentDialauge;}
     public HashMap<String, Texture> getTalkingSprites() {return talkingSprites;}
-    //endregion
+    public AudioController getAudioController() {return audioController;}
+    public TiledMap getCurrentMap(){return currentMap;}
+//endregion
 }

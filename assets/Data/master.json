@@ -2,6 +2,7 @@
   "stage": {
                 "mapName": "You Shouldnt be here",
                 "map": "TileMaps/testZone/main.tmx",
+                "mapMusic": "Music/test.mp3",
                 "mapHeight": 22,
                 "collision": [
                                {"x":0,"y":21,"l":32,"w":0.5},

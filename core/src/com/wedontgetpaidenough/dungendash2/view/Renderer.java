@@ -9,13 +9,19 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g3d.particles.influencers.RegionInfluencer;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.wedontgetpaidenough.dungendash2.Main;
 import com.wedontgetpaidenough.dungendash2.model.Dialauge;
 import com.wedontgetpaidenough.dungendash2.model.GameState;
+import com.badlogic.gdx.math.Rectangle;
+
+
+import java.awt.*;
 
 public class Renderer {
     public static final int xOffset = 896,yOffset = 476;
@@ -40,7 +46,7 @@ public class Renderer {
         cooldude = new Texture("assets/Assets/coolasslildude.png");
     }
     public void newMap(){
-        mapRenderer.setMap(state.getCurrentMap().getMap());
+        mapRenderer.setMap(state.getCurrentMap());
         mapRenderer.setView(camera);
     }
     public void render(){
@@ -51,6 +57,15 @@ public class Renderer {
         batch.end();
         mapRenderer.render(new int[]{1});
         mapRenderer.render(new int[]{2});
+        MapObjects thing = mapRenderer.getMap().getLayers().get(3).getObjects();
+        for(Object colider : thing){
+            RectangleMapObject col = (RectangleMapObject) colider;
+            if(state.getPlayerRectangle().overlaps(col.getRectangle())){
+                System.out.println("Holy shit");
+                System.out.println(col.getProperties().get("coolness"));
+            }
+
+        }
     }
     public void doDialauge(Dialauge dialauge) {
         if (dialauge.getText().size() == dialauge.getSprites().size()){

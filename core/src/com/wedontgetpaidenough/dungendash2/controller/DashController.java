@@ -34,7 +34,8 @@ public class DashController {
         inputController = new InputController(state);
         renderer = new Renderer(state,batch,camera);
         state.setRenderer(renderer);
-        state.switchMap(new WarpZone(new Point(256,256),"stage"));
+        state.switchMap(new WarpZone(new Point(256,256),"test"));
+        state.getAudioController().swapMusic();
     }//todo make a non-jank solution to display the title screen probably use state.
     public void render(){  //Render order go here :3
         switch(state.getGameState()){

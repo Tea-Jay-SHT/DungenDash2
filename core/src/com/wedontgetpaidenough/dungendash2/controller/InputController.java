@@ -8,8 +8,15 @@ package com.wedontgetpaidenough.dungendash2.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.JsonReader;
 import com.wedontgetpaidenough.dungendash2.enums.State;
+import com.wedontgetpaidenough.dungendash2.model.Dialauge;
 import com.wedontgetpaidenough.dungendash2.model.GameState;
+import com.badlogic.gdx.math.Rectangle;
+import com.wedontgetpaidenough.dungendash2.model.WarpZone;
 
 import java.awt.*;
 
@@ -77,19 +84,19 @@ public class InputController {
             state.setyMomentum(0d-maxSpeed);
         }
         Rectangle playerRectangle = state.getPlayerRectangle();                     //check if it colides on x first then y
-        int oldx = playerRectangle.x;
+        float oldx = playerRectangle.x;
         playerRectangle.x += state.getxMomentum();
-        for(Rectangle colider :state.getCurrentMap().getCollisionRectangles()){
-            if(playerRectangle.intersects(colider)){
+        for(MapObject colider :state.getCurrentMap().getLayers().get("coliders").getObjects()){
+            if(playerRectangle.overlaps(((RectangleMapObject) colider).getRectangle())){
                 playerRectangle.x =oldx;
                 state.setxMomentum(0d);
                 break;
             }
         }
-        int oldy = playerRectangle.y;
+        float oldy = playerRectangle.y;
         playerRectangle.y += state.getyMomentum();
-        for(Rectangle colider :state.getCurrentMap().getCollisionRectangles()){
-            if(playerRectangle.intersects(colider)){
+        for(MapObject colider :state.getCurrentMap().getLayers().get("coliders").getObjects()){
+            if(playerRectangle.overlaps(((RectangleMapObject) colider).getRectangle())){
                 playerRectangle.y = oldy;
                 state.setyMomentum(0d);
                 break;
@@ -98,16 +105,18 @@ public class InputController {
         state.setPlayerRectangle(playerRectangle);
         state.setxMomentum(state.getxMomentum()-(state.getxMomentum()*delta*decayRate)); //apply friction/decay
         state.setyMomentum(state.getyMomentum()-(state.getyMomentum()*delta*decayRate));
-        //todo check warp zones and event zones
-        for(Rectangle colider:state.getCurrentMap().getWarpZones().keySet()){
-            if(playerRectangle.intersects(colider)){
-                state.switchMap(state.getCurrentMap().getWarpZones().get(colider));
+        for(MapObject colider :state.getCurrentMap().getLayers().get("warpZones").getObjects()){
+            if(playerRectangle.overlaps(((RectangleMapObject) colider).getRectangle())){
+                state.switchMap(
+                        new WarpZone(
+                                new Point((int)colider.getProperties().get("spawnX"),(int)colider.getProperties().get("spawnY")),
+                                (String) colider.getProperties().get("spawnLocation")));
                 break;
             }
         }
-        for(Rectangle colider:state.getCurrentMap().getSpecialEvents().keySet()){
-            if(playerRectangle.intersects(colider)){
-                state.getEventController().specialEvents(state.getCurrentMap().getSpecialEvents().get(colider));
+        for(MapObject colider :state.getCurrentMap().getLayers().get("specialEvents").getObjects()){
+            if(playerRectangle.overlaps(((RectangleMapObject) colider).getRectangle())){
+                state.getEventController().specialEvents((String)colider.getProperties().get("eventFunction"));
                 break;
             }
         }
@@ -115,10 +124,10 @@ public class InputController {
 
     public void lookForDialauge() {
         if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
-            for(Rectangle colider:state.getCurrentMap().getDialaugeMap().keySet()){
-                if(state.getPlayerRectangle().intersects(colider)){
+            for(MapObject colider :state.getCurrentMap().getLayers().get("dialauge").getObjects()){
+                if(state.getPlayerRectangle().overlaps(((RectangleMapObject) colider).getRectangle())){
                     state.setGameState(State.Dialauge);
-                    state.setCurrentDialauge(state.getCurrentMap().getDialaugeMap().get(colider));
+                    state.setCurrentDialauge(new Dialauge(new JsonReader().parse((String)colider.getProperties().get("dialaugeData")),state));
                     break;
                 }
             }
