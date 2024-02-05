@@ -20,6 +20,8 @@ public class SpecialEventController {
             case "boom":
                 System.out.println("boom");
                 break;
+            case "crash":
+                System.exit(0);
         }
     }
 }

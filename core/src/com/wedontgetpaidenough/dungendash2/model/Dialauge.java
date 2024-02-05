@@ -41,7 +41,7 @@ public class Dialauge {
         state.getEventController().specialEvents(eventFunctions.get(iterator-1));
         if(iterator == talkingSprites.size()){
             state.setGameState(State.Playing);
-            iterator = 0;
+            iterator -=1;
         }
     }
 }

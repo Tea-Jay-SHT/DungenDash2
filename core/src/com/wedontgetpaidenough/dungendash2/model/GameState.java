@@ -64,7 +64,7 @@ public class GameState {
         }
     }
     //endregion
-    public void switchMap(WarpZone warpZone){  //switch map, useful for the warp zones in map object
+    public void switchMap(WarpZone warpZone){
         currentMap = maps.get(warpZone.getDestanation());
         playerRectangle.x =(int) Math.round(warpZone.getSpawnLocation().getX());
         playerRectangle.y =(int) Math.round(warpZone.getSpawnLocation().getY());

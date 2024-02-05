@@ -6,6 +6,7 @@
  */
 package com.wedontgetpaidenough.dungendash2.view;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,7 +16,6 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.wedontgetpaidenough.dungendash2.Main;
 import com.wedontgetpaidenough.dungendash2.model.Dialauge;
 import com.wedontgetpaidenough.dungendash2.model.GameState;
-
 import java.awt.*;
 import java.util.Iterator;
 
@@ -47,12 +47,11 @@ public class Renderer {
     }
     public void render(){
         mapRenderer.setView(camera);
-        mapRenderer.render(new int[]{0});
+        mapRenderer.render(new int[]{0,1,2,3,4});
         batch.begin();
         batch.draw(cooldude,state.getPlayerRectangle().x,state.getPlayerRectangle().y);   //todo add animation logic
         batch.end();
-        mapRenderer.render(new int[]{1});
-        mapRenderer.render(new int[]{2});
+        mapRenderer.render(new int[]{5,6,7,8,9});
     }
     public void doDialauge(Dialauge dialauge) {
         if (dialauge.getText().size() == dialauge.getSprites().size()){
@@ -63,5 +62,4 @@ public class Renderer {
                 batch.end();
         }
     }
-
 }

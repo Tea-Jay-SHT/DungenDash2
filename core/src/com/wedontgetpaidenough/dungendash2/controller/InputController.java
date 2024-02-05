@@ -22,7 +22,7 @@ import java.awt.*;
 
 public class InputController {
     GameState state;
-    private Double maxSpeed = 10d,movementSpeed = 50d,decayRate = 10d,minimumMomentum = 16d; //todo tweak until this feels good
+    private Double maxSpeed = 12d,movementSpeed = 100d,decayRate = 10d,minimumMomentum = 16d; //todo tweak until this feels good
     public InputController(GameState state){
         this.state = state;
     }
