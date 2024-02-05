@@ -6,5 +6,5 @@
  */
 package com.wedontgetpaidenough.dungendash2.model;
 
-public class Enemy {
+public class Enemy { //todo whatever the hell this is
 }

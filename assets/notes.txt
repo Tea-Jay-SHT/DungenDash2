@@ -1,0 +1,29 @@
+=============TILED CHECKLIST=================
+1. go to Map>Map Properties
+2. add 3 properties, mapName, mapTitle and mapMusic (case sensitive)
+3. add object layers coliders, warpZones, dialauge, specialEvents (case sensitive)   <------------ ALWAYS ON TOP
+4. add tile layers (TBD) (Potentially 5 bottom, 5 top layers?)
+=============================================
+
+File Structure:
+Tilemaps
+	Zone1
+	Zone2
+	TileSheets
+
+Map Properties:
+mapName
+mapMusic
+
+Map Layers are like this:
+Base
+Extras
+BackgroundBuildings
+
+Shadows
+Foreground Buildings
+Foreground Extras
+coliders
+warpZones - int spawnX, int spawnY, String spawnLocation
+specialEvents - String eventFunction
+dialauge - Json dialaugeData    Looks like -> [{"text":"Want some", "talkingSprite": "troll"},{"text":"Yes","talkingSprite":"player_luhcalm","eventFunction":"boom"}]

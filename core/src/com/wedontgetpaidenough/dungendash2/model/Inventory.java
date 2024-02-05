@@ -6,5 +6,5 @@
  */
 package com.wedontgetpaidenough.dungendash2.model;
 
-public class Inventory {
+public class Inventory { //todo what the fuck am i thinking
 }

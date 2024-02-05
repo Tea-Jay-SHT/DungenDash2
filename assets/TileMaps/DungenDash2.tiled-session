@@ -1,0 +1,76 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "testZone/main.tmx",
+    "expandedProjectPaths": [
+        ".",
+        "tileSets",
+        "testZone"
+    ],
+    "fileStates": {
+        "empty.tmx": {
+            "scale": 0.3898958333333333,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1456.7993588030993,
+                "y": 755.3299492385788
+            }
+        },
+        "testZone/main.tmx": {
+            "scale": 0.125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 4072,
+                "y": 2108
+            }
+        },
+        "tileMaps/testTiles.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tileSets/Shadow.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tileSets/TreeShadow.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tileSets/testRock.tsx": {
+            "scaleInDock": 1
+        },
+        "tileSets/testTiles.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Users/tkelly/Desktop/Personal/DungenDash2Redux/assets/TileMaps/tileSets",
+    "map.lastUsedFormat": "tmx",
+    "map.layerDataFormat": null,
+    "map.renderOrder": null,
+    "map.tileHeight": 128,
+    "map.tileWidth": 128,
+    "openFiles": [
+        "testZone/main.tmx",
+        "tileSets/Shadow.tsx",
+        "tileSets/testTiles.tsx"
+    ],
+    "project": "DungenDash2.tiled-project",
+    "property.type": "string",
+    "recentFiles": [
+        "tileSets/TreeShadow.tsx",
+        "tileSets/Shadow.tsx",
+        "empty.tmx",
+        "tileSets/testTiles.tsx",
+        "testZone/main.tmx",
+        "tileMaps/testTiles.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 128,
+        "width": 128
+    }
+}

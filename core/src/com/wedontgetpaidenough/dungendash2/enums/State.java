@@ -6,4 +6,4 @@
  */
 package com.wedontgetpaidenough.dungendash2.enums;
 
-public enum State {Playing, Dialauge, PauseMenu, Inventory,}
+public enum State {MainMenu,Playing, Dialauge, PauseMenu, Inventory,}
