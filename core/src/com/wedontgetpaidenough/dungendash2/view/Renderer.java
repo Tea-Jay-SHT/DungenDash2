@@ -10,17 +10,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g3d.particles.influencers.RegionInfluencer;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.wedontgetpaidenough.dungendash2.Main;
 import com.wedontgetpaidenough.dungendash2.model.Dialauge;
 import com.wedontgetpaidenough.dungendash2.model.GameState;
-import com.badlogic.gdx.math.Rectangle;
-
 
 import java.awt.*;
 import java.util.Iterator;
