@@ -6,13 +6,10 @@
  */
 package com.wedontgetpaidenough.dungendash2.model;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonValue;
-import com.wedontgetpaidenough.dungendash2.enums.State;
-import org.w3c.dom.Text;
+import com.wedontgetpaidenough.dungendash2.model.enums.State;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Dialauge {
     private GameState state;

@@ -31,9 +31,7 @@ public class DashController {
         inputController = new InputController(state);
         renderer = new Renderer(state,batch,camera);
         state.setRenderer(renderer);
-        state.switchMap(new WarpZone(new Point(512,512),"test"));
-        state.getAudioController().swapMusic();
-    }//todo make a non-jank solution to display the title screen probably use state.
+    }
     public void render(){
         switch(state.getGameState()){
             case Playing:
@@ -48,6 +46,9 @@ public class DashController {
                 renderer.render();
                 renderer.doDialauge(state.getCurrentDialauge());
                 break;
+            case MainMenu:
+                inputController.doInput();
+                renderer.title();
         }
         //System.out.println(state.getGameState().toString());
         //System.out.println(state.getPlayerRectangle().x+", "+state.getPlayerRectangle().y+" Momentum: "+state.getxMomentum()+", "+state.getyMomentum());
@@ -56,10 +57,3 @@ public class DashController {
         //todo: Work down the tree and dispose of all assets.
     }
 }
-//Take Input
-//Check Colision
-//Apply Momentum
-//Render map layer 1
-//Render player
-//render map layer 2
-//render UI

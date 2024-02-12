@@ -13,7 +13,7 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setTitle("Dungen Dash 2");
-		config.setWindowedMode(screenSize.width, screenSize.height);
+		config.setWindowedMode(screenSize.width/2, screenSize.height/2);
 		new Lwjgl3Application(new Main(), config);
 	}
 }
