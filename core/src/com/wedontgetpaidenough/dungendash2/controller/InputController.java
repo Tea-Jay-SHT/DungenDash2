@@ -12,10 +12,9 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.JsonReader;
-import com.wedontgetpaidenough.dungendash2.enums.State;
+import com.wedontgetpaidenough.dungendash2.model.enums.State;
 import com.wedontgetpaidenough.dungendash2.model.Dialauge;
 import com.wedontgetpaidenough.dungendash2.model.GameState;
-import com.badlogic.gdx.math.Rectangle;
 import com.wedontgetpaidenough.dungendash2.model.WarpZone;
 
 import java.awt.*;
@@ -23,6 +22,7 @@ import java.awt.*;
 public class InputController {
     GameState state;
     private Double maxSpeed = 12d,movementSpeed = 100d,decayRate = 10d,minimumMomentum = 16d; //todo tweak until this feels good
+    private int selection = 0;
     public InputController(GameState state){
         this.state = state;
     }
@@ -31,7 +31,7 @@ public class InputController {
             case Playing:
                 input();
             case MainMenu:
-                mouseinput();
+                selectionInput(3,"TitleSelection");
                 break;
             case Inventory:
             case PauseMenu:
@@ -39,6 +39,7 @@ public class InputController {
                 dialaugeinput();
                 break;
         }
+        state.setSelection(selection);
     }
 
     private void dialaugeinput() {
@@ -46,12 +47,22 @@ public class InputController {
             state.getCurrentDialauge().next();
         }
     }
-
-    private void mouseinput() {//todo localized mouse input
-
+    private void selectionInput(int max, String context) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+            if (selection != max) {
+                selection++;
+            }
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+            if (selection != 0) {
+                selection--;
+            }
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)||Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
+            state.getEventController().specialEvents(selection+context);
+        }
     }
-
-    public void input(){ //todo check for 2 directional movements
+    private void input(){ //todo check for 2 directional movements
         double delta = Gdx.graphics.getDeltaTime(); //todo controller input
         if (Gdx.input.isKeyPressed(Input.Keys.W)){           //take raw inputs and add them to the momentum
             state.addYMomentum(movementSpeed*delta);

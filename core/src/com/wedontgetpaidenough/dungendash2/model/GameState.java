@@ -6,30 +6,27 @@
  */
 package com.wedontgetpaidenough.dungendash2.model;
 
-import java.awt.*;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.wedontgetpaidenough.dungendash2.controller.AudioController;
 import com.wedontgetpaidenough.dungendash2.controller.SpecialEventController;
-import com.wedontgetpaidenough.dungendash2.enums.State;
+import com.wedontgetpaidenough.dungendash2.model.enums.State;
 import com.wedontgetpaidenough.dungendash2.view.Renderer;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class GameState {
     public static final int TILE_SIZE = 128;
     private Double xMomentum=0d,yMomentum=0d;
+    private int selection;
     private Rectangle playerRectangle;
     private Dialauge currentDialauge;
     private Renderer renderer;
-    private State gameState = State.Playing;
+    private State gameState = State.MainMenu;
     private HashMap<String, Texture> talkingSprites;
     private SpecialEventController eventController;
     private AudioController audioController;
@@ -92,5 +89,7 @@ public class GameState {
     public HashMap<String, Texture> getTalkingSprites() {return talkingSprites;}
     public AudioController getAudioController() {return audioController;}
     public TiledMap getCurrentMap(){return currentMap;}
-//endregion
+    public int getSelection() {return selection;}
+    public void setSelection(int selection) {this.selection = selection;}
+    //endregion
 }

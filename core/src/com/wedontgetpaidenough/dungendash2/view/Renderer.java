@@ -20,7 +20,7 @@ import java.awt.*;
 import java.util.Iterator;
 
 public class Renderer {
-    public static final int xOffset = 896,yOffset = 476;
+    public static final int xOffset = 896,yOffset = 476, WIDTH = 1920, HEIGHT = 1080;
    OrthogonalTiledMapRenderer mapRenderer;
    BitmapFont font;
     Texture cooldude;
@@ -28,6 +28,10 @@ public class Renderer {
     SpriteBatch batch;
     OrthographicCamera camera;
     private Texture dialaugeFrame;
+    int[] paralaxValues = {0,0,0,0};
+    Texture[] paralaxImages = new Texture[4];
+    Texture[] titleSelector = new Texture[4];
+    Texture logo;
     public Renderer(GameState state, SpriteBatch batch, OrthographicCamera camera){
         this.state = state;
         this.batch = batch;
@@ -40,6 +44,15 @@ public class Renderer {
         font.getData().setScale(3);
         font.setColor(Color.BLACK);
         cooldude = new Texture("assets/Assets/coolasslildude.png");
+        logo = new Texture("assets/Assets/titlescreen/logo.png");
+        paralaxImages[0] = new Texture("assets/Assets/titlescreen/1.png");
+        paralaxImages[1] = new Texture("assets/Assets/titlescreen/2.png");
+        paralaxImages[2] = new Texture("assets/Assets/titlescreen/3.png");
+        paralaxImages[3] = new Texture("assets/Assets/titlescreen/4.png");
+        titleSelector[0] = new Texture("assets/Assets/titlescreen/selector0.png");
+        titleSelector[1] = new Texture("assets/Assets/titlescreen/selector1.png");
+        titleSelector[2] = new Texture("assets/Assets/titlescreen/selector2.png");
+        titleSelector[3] = new Texture("assets/Assets/titlescreen/selector3.png");
     }
     public void newMap(){
         mapRenderer.setMap(state.getCurrentMap());
@@ -61,5 +74,19 @@ public class Renderer {
                 batch.draw(state.getTalkingSprites().get(dialauge.getSprites().get(dialauge.getIterator())),Math.round(state.getPlayerRectangle().getX()-xOffset+70),Math.round(state.getPlayerRectangle().getY()-yOffset+250),GameState.TILE_SIZE*3,GameState.TILE_SIZE*3);
                 batch.end();
         }
+    }
+    public void title() {
+        batch.begin();
+        for (int i = 0; i < paralaxImages.length; i++) {
+            paralaxValues[i]-=(i+1);
+            if (paralaxValues[i] <= -WIDTH){
+            paralaxValues[i] += WIDTH;
+            }
+            batch.draw(paralaxImages[i],paralaxValues[i],0,WIDTH,HEIGHT);
+            batch.draw(paralaxImages[i],paralaxValues[i]+WIDTH,0,WIDTH,HEIGHT);
+        }
+        batch.draw(titleSelector[state.getSelection()],16,-750,1024,1024);
+        batch.draw(logo, 540,520);
+        batch.end();
     }
 }
